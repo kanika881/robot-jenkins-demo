@@ -11,9 +11,14 @@ pipeline {
 
         stage('Run Robot Tests') {
             steps {
-                bat 'robot tests'
+                bat 'robot --outputdir results tests'
             }
         }
+    }
 
+    post {
+        always {
+            robot outputPath: 'results'
+        }
     }
 }
